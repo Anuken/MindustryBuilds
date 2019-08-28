@@ -25,6 +25,6 @@ jobs:
         ./gradlew android:assembleDebug -Pbuildversion="$GITHUB_SHA" -PversionType="bleeding-edge"
     - name: Upload Builds
       uses: JasonEtco/upload-to-release@v0.1.1
-      with:
+      env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         args: "Mindustry/desktop/build/libs/Mindustry.jar"
