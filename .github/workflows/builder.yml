@@ -18,6 +18,7 @@ jobs:
         git clone --depth 1 https://github.com/Anuken/Arc.git
     - name: Build binaries
       run: |
+        cd Mindustry
         ./gradlew desktop:dist -Pbuildversion="$GITHUB_SHA" -PversionType="bleeding-edge"
         ./gradlew android:assembleDebug -Pbuildversion="$GITHUB_SHA" -PversionType="bleeding-edge"
     - name: Upload Builds
