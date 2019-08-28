@@ -28,4 +28,4 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       with:
-        args: "Mindustry/desktop/build/libs/Mindustry.jar"
+        args: "Mindustry/desktop/build/libs/Mindustry.jar application/zip"
