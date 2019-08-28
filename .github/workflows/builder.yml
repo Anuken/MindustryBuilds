@@ -16,6 +16,7 @@ jobs:
       run: |
         git clone --depth 1 https://github.com/Anuken/Mindustry.git
         git clone --depth 1 https://github.com/Anuken/Arc.git
+        echo "sdk.dir=/usr/local/lib/android/sdk" > Mindustry/local.properties
     - name: Build binaries
       run: |
         cd Mindustry
