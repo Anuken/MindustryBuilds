@@ -17,7 +17,7 @@ jobs:
         git clone --depth 1 https://github.com/Anuken/Mindustry.git
         git clone --depth 1 https://github.com/Anuken/Arc.git
         echo "sdk.dir=/usr/local/lib/android/sdk" > Mindustry/local.properties
-        chmod -R 757 /usr/local/lib/android/sdk
+        sudo chmod -R 757 /usr/local/lib/android/sdk
     - name: Build binaries
       run: |
         cd Mindustry
