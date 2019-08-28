@@ -1,0 +1,26 @@
+name: Builder
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Clone Mindustry
+      run: |
+        git clone --depth 1 https://github.com/Anuken/Mindustry.git
+        git clone --depth 1 https://github.com/Anuken/Arc.git
+    - name: Build binaries
+      run: |
+        ./gradlew desktop:dist -Pbuildversion="$GITHUB_SHA" -PversionType="bleeding-edge"
+        ./gradlew android:assembleDebug -Pbuildversion="$GITHUB_SHA" -PversionType="bleeding-edge"
+    - name: Upload Builds
+      uses: JasonEtco/upload-to-release@v0.1.1
+      with:
+        args: "Mindustry/desktop/build/libs/Mindustry.jar"
