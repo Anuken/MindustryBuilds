@@ -9,7 +9,7 @@ script:
 - git clone --depth=1 --branch=master https://github.com/Anuken/Arc
 - git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
 - cd Mindustry
-- echo "sdk.dir=usr/local/android-sdk" > local.properties
+- echo "sdk.dir=/usr/local/android-sdk" > local.properties
 - "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew android:assembleDebug -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
