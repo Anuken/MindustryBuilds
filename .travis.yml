@@ -6,8 +6,8 @@ android:
   - android-29
   - build-tools-29.0.2
 script:
-- git clone --depth=1 --branch=master https://github.com/Anuken/Arc ../Arc
-- git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry ../Mindustry
+- git clone --depth=1 --branch=master https://github.com/Anuken/Arc
+- git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
 - cd Mindustry
 - "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
