@@ -11,6 +11,8 @@ script:
 - git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
 - cd Mindustry
 - echo "sdk.dir=/usr/local/android-sdk" > local.properties
+- sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"' android/build.gradle
+- sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"' android/AndroidManifest.xml
 - "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew android:assembleDebug -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
