@@ -1,13 +1,10 @@
 jdk:
 - openjdk8
-
 dist: trusty
-
 android:
   components:
-    - android-29
-    - build-tools-29.0.2
-
+  - android-29
+  - build-tools-29.0.2
 script:
 - git clone --depth=1 --branch=master https://github.com/Anuken/Arc ../Arc
 - git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry ../Mindustry
@@ -19,16 +16,16 @@ script:
 - mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
 - mv android/build/outputs/apk/debug/android-debug.apk android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
 
-
 deploy:
-  - provider: releases
-    skip_cleanup: true
-    draft: false
-    file:
-    - Mindustry/desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
-    - Mindustry/server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
-    - Mindustry/android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
-    on:
-      repo: Anuken/MindustryBuilds
-      tags: true
-
+  provider: releases
+  api_key:
+    secure: lOmZYBHwkvFv798N/5ZI6t3LTDQnP5KhTeb6BXNps+dQu2DktAt3vAav/TA8PfCcxgFZzJ76sgyhtTycMpWvROV9fOQz67d0w2n7cVZ4FDn93Fm5tPzgEvPwhX9u+6wZsQStRfMiRBEg0QwUUw2qwcN1xpff6c0ejRDJrzeOY5ISvEBQtaMaQsY1oGiByMiplAlwiMnBzw9zKHmaOn93WEOB99W+JfGnhCfP92buMGcJk+XYd1jII73edKCZQeicn34xUaVj5tVD861AaliMfiGLk09mcmnM/DBMHo/i1UjuTYXPjY2ALSKhaARpZ5DJTjW2lEHv3wMTH2qIRj1SQ2eHHTuaOHPmyNTKIoIOQqftlrRLpI9U8pQ+pH51s4XaZD7u86NRmJh2lnfwH2iBNySAfofj+nK7IGJcZRrbSnpi5jdeZEAWZK4wsfYyy2RufHJJbrEPROAnSylVXZPAHj7EOyXfxnoaG36MKv1oElUecreUIrWrcZXG0YHHbmL0rYTIDTZazAS89UmjRNrU4tubHW9yXbUSn1aTTdxBsqXI3YFr0/N7iv7trR6LtoGgGs3BT5nvAzcahIqtyntcyFLDXHP8W6bWactoRbZ+1jisAGhKPbWGDVznJHln5xpPRYEciwTcljkCChLvbAmaP4BhimFDKku44gyvf1ILL+4=
+  skip_cleanup: true
+  draft: false
+  file:
+  - Mindustry/desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
+  - Mindustry/server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
+  - Mindustry/android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
+  on:
+    repo: Anuken/MindustryBuilds
+    tags: true
