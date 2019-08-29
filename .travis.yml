@@ -12,9 +12,12 @@ script:
 - git clone --depth=1 --branch=master https://github.com/Anuken/Arc ../Arc
 - git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry ../Mindustry
 - cd Mindustry
-- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_BUILD_NUMBER}"
-- "./gradlew server:dist -Pbuildversion=${TRAVIS_BUILD_NUMBER}"
-- "./gradlew android:assembleDebug -Pbuildversion=${TRAVIS_BUILD_NUMBER}"
+- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
+- "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
+- "./gradlew android:assembleDebug -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
+- mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
+- mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
+- mv android/build/outputs/apk/debug/android-debug.apk android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
 
 
 deploy:
@@ -22,10 +25,10 @@ deploy:
     skip_cleanup: true
     draft: false
     file:
-    - desktop/build/libs/Mindustry.jar
-    - server/build/libs/server-release.jar
-    - android/build/libs/android-release.apk
+    - Mindustry/desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
+    - Mindustry/server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
+    - Mindustry/android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
     on:
-      repo: Anuken/Mindustry
+      repo: Anuken/MindustryBuilds
       tags: true
 
