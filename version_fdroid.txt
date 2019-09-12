@@ -1,0 +1,2 @@
+versionName=4-fdroid-v92
+versionCode=92
