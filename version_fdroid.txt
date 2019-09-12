@@ -1,2 +1,2 @@
-versionName=4-fdroid-v9999
-versionCode=9999
+versionName=4-fdroid-
+versionCode=
