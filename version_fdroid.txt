@@ -1,2 +1,2 @@
-versionName=4-fdroid-93
-versionCode=93
+versionName=4-fdroid-94
+versionCode=94
