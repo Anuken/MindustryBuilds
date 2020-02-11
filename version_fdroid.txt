@@ -1,2 +1,2 @@
-versionName=5-fdroid-103
-versionCode=103
+versionName=5-fdroid-104
+versionCode=104
