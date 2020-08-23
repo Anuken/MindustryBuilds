@@ -1,5 +1,5 @@
 jdk:
-- openjdk8
+- openjdk14
 dist: trusty
 language: android
 android:
