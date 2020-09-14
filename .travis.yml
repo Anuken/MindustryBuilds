@@ -14,7 +14,7 @@ script:
 - sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
 - sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
 - sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
-- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge" --stacktrace
+- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge --stacktrace"
 - "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew android:assembleDebug -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
