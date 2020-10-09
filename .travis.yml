@@ -11,15 +11,16 @@ script:
 - git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
 - cd Mindustry
 - echo "sdk.dir=/usr/local/android-sdk" > local.properties
-- sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
+- sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g'
+  android/build.gradle
 - sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
 - sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
-- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge --stacktrace"
+- "./gradlew desktop:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge
+  --stacktrace"
 - "./gradlew server:dist -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - "./gradlew android:assembleRelease -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
 - mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
-- find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
 - mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${TRAVIS_TAG}.apk
 deploy:
   provider: releases
@@ -34,3 +35,6 @@ deploy:
   on:
     repo: Anuken/MindustryBuilds
     tags: true
+before_install:
+- openssl aes-256-cbc -K $encrypted_05543ea905ba_key -iv $encrypted_05543ea905ba_iv
+  -in bekeystore.jks.enc -out bekeystore.jks -d
