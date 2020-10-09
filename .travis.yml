@@ -19,7 +19,7 @@ script:
 - "./gradlew android:assembleRelease -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
 - mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
-- mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
+- mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${TRAVIS_TAG}.apk
 deploy:
   provider: releases
   skip_cleanup: true
@@ -29,7 +29,7 @@ deploy:
   file:
   - desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
   - server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
-  - android/build/outputs/apk/debug/Mindustry-BE-Android-${TRAVIS_TAG}.apk
+  - android/build/outputs/apk/release/Mindustry-BE-Android-${TRAVIS_TAG}.apk
   on:
     repo: Anuken/MindustryBuilds
     tags: true
