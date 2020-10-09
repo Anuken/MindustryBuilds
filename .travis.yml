@@ -19,6 +19,7 @@ script:
 - "./gradlew android:assembleRelease -Pbuildversion=${TRAVIS_TAG} -PversionType=bleeding-edge"
 - mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${TRAVIS_TAG}.jar
 - mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${TRAVIS_TAG}.jar
+- find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
 - mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${TRAVIS_TAG}.apk
 deploy:
   provider: releases
