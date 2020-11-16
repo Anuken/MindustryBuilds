@@ -1,2 +1,2 @@
-versionName=6-fdroid-113.2
-versionCode=113.2
+versionName=6-fdroid-114
+versionCode=114
