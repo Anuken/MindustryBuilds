@@ -1,0 +1,56 @@
+name: Build Artifacts
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 14
+      uses: actions/setup-java@v1
+      with:
+        java-version: 14
+    - name: Set up keystore
+      run: |
+        echo ${{ secrets.KEYSTORE_BASE64 }} > keystore.txt
+        base64 --decode keystore.txt > bekeystore.jks
+    - name: Create artifacts
+      env:
+        keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
+        keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
+        keystore_alias: ${{ secrets.KEYSTORE_ALIAS_SECRET }}
+      run: |
+        git clone --depth=1 --branch=master https://github.com/Anuken/Arc
+        git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
+        cd Mindustry
+        echo "sdk.dir=/usr/local/android-sdk" > local.properties
+        sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g'android/build.gradle
+        sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
+        sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
+        "./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${GITHUB_REF} -PversionType=bleeding-edge --stacktrace"
+        mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${GITHUB_REF}.jar
+        mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${GITHUB_REF}.jar
+        mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${GITHUB_REF}.apk
+    - name: Upload desktop artifacts
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: desktop/build/libs/Mindustry-BE-Desktop-${GITHUB_REF}.jar
+        tag: ${{ github.ref }}
+    - name: Upload server artifacts
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: server/build/libs/Mindustry-BE-Server-${GITHUB_REF}.jar
+        tag: ${{ github.ref }}
+    - name: Upload Android artifacts
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: android/build/outputs/apk/release/Mindustry-BE-Android-${GITHUB_REF}.apk
+        tag: ${{ github.ref }}
