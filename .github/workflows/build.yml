@@ -29,7 +29,7 @@ jobs:
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
         echo "sdk.dir=/usr/local/android-sdk" > local.properties
-        sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g'android/build.gradle
+        sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
         sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
         "./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${GITHUB_REF} -PversionType=bleeding-edge --stacktrace"
