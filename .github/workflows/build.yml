@@ -3,7 +3,7 @@ name: Build Artifacts
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   deploy:
