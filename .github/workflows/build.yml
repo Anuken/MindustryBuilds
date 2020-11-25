@@ -32,7 +32,7 @@ jobs:
         sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
         sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
-        "./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${GITHUB_REF} -PversionType=bleeding-edge --stacktrace"
+        ./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${GITHUB_REF} -PversionType=bleeding-edge --stacktrace
         mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${GITHUB_REF}.jar
         mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${GITHUB_REF}.jar
         mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${GITHUB_REF}.apk
