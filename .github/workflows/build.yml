@@ -41,17 +41,17 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: desktop/build/libs/Mindustry-BE-Desktop-${{ github.ref }}.jar
+        file: desktop/build/libs/Mindustry-BE-Desktop-${{ env.RELEASE_VERSION }}.jar
         tag: ${{ github.ref }}
     - name: Upload server artifacts
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: server/build/libs/Mindustry-BE-Server-${{ github.ref }}.jar
+        file: server/build/libs/Mindustry-BE-Server-${{ env.RELEASE_VERSION }}.jar
         tag: ${{ github.ref }}
     - name: Upload Android artifacts
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: android/build/outputs/apk/release/Mindustry-BE-Android-${{ github.ref }}.apk
+        file: android/build/outputs/apk/release/Mindustry-BE-Android-${{ env.RELEASE_VERSION }}.apk
         tag: ${{ github.ref }}
