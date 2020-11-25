@@ -17,7 +17,7 @@ jobs:
         java-version: 14
     - name: Set up keystore
       run: |
-        echo ${{ secrets.KEYSTORE_BASE64 }} > keystore.txt
+        echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
         base64 --decode keystore.txt > bekeystore.jks
     - name: Create artifacts
       env:
