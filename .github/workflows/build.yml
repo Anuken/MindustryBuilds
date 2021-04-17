@@ -28,7 +28,6 @@ jobs:
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
       run: |
-        git clone --depth=1 --branch=master https://github.com/Anuken/Arc
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
         sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
