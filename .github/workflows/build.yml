@@ -37,7 +37,7 @@ jobs:
         ./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${RELEASE_VERSION} -PversionType=bleeding-edge --stacktrace
         mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
         mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
-        mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
+        mv android/build/outputs/apk/standard/release/android-standard-release.apk android/build/outputs/apk/standard/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
     - name: Upload desktop artifacts
       uses: svenstaro/upload-release-action@v2
       with:
@@ -54,5 +54,5 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: Mindustry/android/build/outputs/apk/release/Mindustry-BE-Android-${{ env.RELEASE_VERSION }}.apk
+        file: Mindustry/android/build/outputs/apk/standard/release/Mindustry-BE-Android-${{ env.RELEASE_VERSION }}.apk
         tag: ${{ github.ref }}
