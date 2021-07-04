@@ -1,2 +1,2 @@
 versionName=7-fdroid-127.2
-versionCode=30
+versionCode=130
