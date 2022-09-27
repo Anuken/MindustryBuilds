@@ -30,6 +30,7 @@ jobs:
       run: |
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
+        echo "BODY=$(git rev-parse HEAD)" >> $GITHUB_ENV
         sed -i 's/applicationId "io.anuke.mindustry"/applicationId "io.anuke.mindustry.be"/g' android/build.gradle
         sed -i 's/"io.anuke.mindustry"/"io.anuke.mindustry.be"/g' android/AndroidManifest.xml
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
@@ -44,6 +45,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: Mindustry/desktop/build/libs/Mindustry-BE-Desktop-${{ env.RELEASE_VERSION }}.jar
         tag: ${{ github.ref }}
+        body: ${{ env.BODY }}
     - name: Upload server artifacts
       uses: svenstaro/upload-release-action@v2
       with:
