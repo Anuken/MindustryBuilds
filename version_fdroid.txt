@@ -1,2 +1,2 @@
-versionName=7-fdroid-145.1
-versionCode=1068
+versionName=7-fdroid-
+versionCode=1069
