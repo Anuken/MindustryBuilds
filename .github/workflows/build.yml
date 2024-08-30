@@ -64,7 +64,7 @@ jobs:
         username: ${{ secrets.STEAM_USERNAME }}
         configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
         appId: 1127400
-        buildDescription: Bleeding-Edge Build ${RELEASE_VERSION}
+        buildDescription: Bleeding-Edge Build ${{ env.RELEASE_VERSION }}
         rootPath: Mindustry/deploy
         depot2Path: Windows64
         depot3Path: Linux64
