@@ -29,6 +29,7 @@ jobs:
         wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-linux64.zip
         wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-windows64.zip
         wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-macos.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/packr.jar
     - name: Create artifacts
       env:
         keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
