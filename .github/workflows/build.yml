@@ -22,11 +22,19 @@ jobs:
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
         base64 --decode keystore.txt > bekeystore.jks
+    - name: Fetch JRE for Steam deployment
+      run: |
+        mkdir ~/jdks
+        cd ~/jdks
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-linux64.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-windows64.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-macos.zip
     - name: Create artifacts
       env:
         keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
+        JDK_DIR: ${{ runner.home }}/jdks
       run: |
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
@@ -39,6 +47,9 @@ jobs:
         mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
         mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
         mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
+        echo "JDK directory: $JDK_DIR"
+        ./gradlew desktop:dist -Pbuildversion=${RELEASE_VERSION} -Prelease -PversionModifier=steam -PversionType=bleeding-edge desktop:packrLinux64 desktop:packrWindows64 desktop:packrMacOS --stacktrace
+        ls deploy/
     - name: Upload desktop artifacts
       uses: svenstaro/upload-release-action@v2
       with:
