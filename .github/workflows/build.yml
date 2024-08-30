@@ -55,7 +55,22 @@ jobs:
         mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
         echo "JDK directory: $JDK_DIR"
         ./gradlew desktop:dist -Pbuildversion=${RELEASE_VERSION} -Prelease -PversionModifier=steam -PversionType=bleeding-edge desktop:packrLinux64 desktop:packrWindows64 desktop:packrMacOS --stacktrace
+        echo $PWD
         ls deploy/
+    
+    - name: Deploy to Steam
+      uses: game-ci/steam-deploy@v3
+      with:
+        username: ${{ secrets.STEAM_USERNAME }}
+        configVdf: ${{ secrets.STEAM_CONFIG_VDF}}
+        appId: 1127400
+        buildDescription: Bleeding-Edge Build ${RELEASE_VERSION}
+        rootPath: Mindustry/deploy
+        depot2Path: Windows64
+        depot3Path: Linux64
+        depot4Path: MacOS
+        releaseBranch: bleeding-edge
+    
     - name: Upload desktop artifacts
       uses: svenstaro/upload-release-action@v2
       with:
