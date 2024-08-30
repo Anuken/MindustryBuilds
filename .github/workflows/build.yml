@@ -24,6 +24,7 @@ jobs:
         base64 --decode keystore.txt > bekeystore.jks
     - name: Fetch JRE for Steam deployment
       run: |
+        echo $HOME
         mkdir ~/jdks
         cd ~/jdks
         wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/jre-linux64.zip
@@ -35,7 +36,7 @@ jobs:
         keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
-        JDK_DIR: $HOME/jdks/
+        JDK_DIR: /home/runner/jdks/
       run: |
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
