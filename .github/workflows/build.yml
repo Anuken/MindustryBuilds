@@ -34,7 +34,7 @@ jobs:
         keystore_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias_password: ${{ secrets.KEYSTORE_PASSWORD_SECRET }}
         keystore_alias: frog
-        JDK_DIR: ${{ runner.home }}/jdks
+        JDK_DIR: ${{ runner.home }}/jdks/
       run: |
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
