@@ -1,2 +1,2 @@
-versionName=8-fdroid-152
-versionCode=1079
+versionName=8-fdroid-152.1
+versionCode=1080
