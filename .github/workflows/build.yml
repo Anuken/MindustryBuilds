@@ -27,9 +27,9 @@ jobs:
         echo $HOME
         mkdir ~/jdks
         cd ~/jdks
-        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v2/jre-linux64.zip
-        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v2/jre-windows64.zip
-        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v2/jre-macos.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v3/jre-linux64.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v3/jre-windows64.zip
+        wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v3/jre-macos.zip
         wget https://github.com/Anuken/MindustryJreBuilds/releases/download/v1/packr.jar
         unzip jre-linux64.zip
         unzip jre-windows64.zip
