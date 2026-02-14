@@ -25,6 +25,7 @@ jobs:
         cd ~
         echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
         base64 --decode keystore.txt > bekeystore.jks
+        ls
     - name: Fetch JRE for Steam deployment
       run: |
         echo $HOME
