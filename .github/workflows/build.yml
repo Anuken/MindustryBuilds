@@ -16,16 +16,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 17
-    - name: Fetch latest Arc
-      run: cd ~ && git clone --depth=1 --branch=master https://github.com/Anuken/Arc
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: Set up keystore
       run: |
-        cd ~
         echo "${{ secrets.KEYSTORE_BASE64 }}" > keystore.txt
         base64 --decode keystore.txt > bekeystore.jks
-        ls
     - name: Fetch JRE for Steam deployment
       run: |
         echo $HOME
@@ -46,7 +42,7 @@ jobs:
         keystore_alias: frog
         JDK_DIR: /home/runner/jdks/
       run: |
-        cd ~
+        git clone --depth=1 --branch=master https://github.com/Anuken/Arc
         git clone --depth=1 --branch=master https://github.com/Anuken/Mindustry
         cd Mindustry
         echo "BODY=$(git rev-parse HEAD)" >> $GITHUB_ENV
