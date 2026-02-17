@@ -51,8 +51,10 @@ jobs:
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
         ./gradlew pack
         ./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${RELEASE_VERSION} -PversionType=bleeding-edge -PshowCommitHash --stacktrace
+        cp desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-Latest.jar
         mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
         mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
+        cp android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-Latest.apk
         mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
         echo "JDK directory: $JDK_DIR"
         ./gradlew desktop:dist -Pbuildversion=${RELEASE_VERSION} -Prelease -PversionModifier=steam -PversionType=bleeding-edge -PshowCommitHash desktop:packrLinux64 desktop:packrWindows64 desktop:packrMacOS --stacktrace
