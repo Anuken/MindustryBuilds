@@ -51,9 +51,9 @@ jobs:
         sed -i 's/Mindustry/Mindustry BE/g' android/res/values/strings.xml
         ./gradlew pack
         ./gradlew desktop:dist server:dist android:assembleRelease -Pbuildversion=${RELEASE_VERSION} -PversionType=bleeding-edge -PshowCommitHash --stacktrace
-        mv desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
-        mv server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
-        mv android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
+        cp desktop/build/libs/Mindustry.jar desktop/build/libs/Mindustry-BE-Desktop-${RELEASE_VERSION}.jar
+        cp server/build/libs/server-release.jar server/build/libs/Mindustry-BE-Server-${RELEASE_VERSION}.jar
+        cp android/build/outputs/apk/release/android-release.apk android/build/outputs/apk/release/Mindustry-BE-Android-${RELEASE_VERSION}.apk
         echo "JDK directory: $JDK_DIR"
         ./gradlew desktop:dist -Pbuildversion=${RELEASE_VERSION} -Prelease -PversionModifier=steam -PversionType=bleeding-edge -PshowCommitHash desktop:packrLinux64 desktop:packrWindows64 desktop:packrMacOS --stacktrace
         echo $PWD
@@ -92,3 +92,11 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: Mindustry/android/build/outputs/apk/release/Mindustry-BE-Android-${{ env.RELEASE_VERSION }}.apk
         tag: ${{ github.ref }}
+    - name: Upload latest version as dependency JAR
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: Mindustry/server/build/libs/server-release.jar
+        tag: master
+        asset_name: latest.jar
+        overwrite: true
