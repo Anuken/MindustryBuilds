@@ -43,7 +43,6 @@ jobs:
         keystore_alias: frog
         JDK_DIR: /home/runner/jdks/
       run: |
-        git clone --depth=1 --branch=v9 https://github.com/Anuken/Arc
         git clone --depth=1 --branch=v9 https://github.com/Anuken/Mindustry
         cd Mindustry
         echo "BODY=$(git rev-parse HEAD)" >> $GITHUB_ENV
