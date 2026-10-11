@@ -1,2 +1,2 @@
-versionName=8-fdroid-160.5
-versionCode=1113
+versionName=8-fdroid-160.7
+versionCode=1115
